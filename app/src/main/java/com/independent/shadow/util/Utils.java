@@ -16,15 +16,23 @@
 
 package com.independent.shadow.util;
 
+import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by zhangshaowen on 16/4/7.
@@ -32,14 +40,13 @@ import java.io.PrintStream;
 public class Utils {
 
     /**
-     * the error code define by myself
-     * should after {@code ShareConstants.ERROR_PATCH_INSERVICE
+     * the error code define by myself should after {@code ShareConstants.ERROR_PATCH_INSERVICE
      */
-    public static final int ERROR_PATCH_GOOGLEPLAY_CHANNEL      = -5;
-    public static final int ERROR_PATCH_ROM_SPACE               = -6;
-    public static final int ERROR_PATCH_MEMORY_LIMIT            = -7;
-    public static final int ERROR_PATCH_ALREADY_APPLY           = -8;
-    public static final int ERROR_PATCH_CRASH_LIMIT             = -9;
+    public static final int ERROR_PATCH_GOOGLEPLAY_CHANNEL = -5;
+    public static final int ERROR_PATCH_ROM_SPACE = -6;
+    public static final int ERROR_PATCH_MEMORY_LIMIT = -7;
+    public static final int ERROR_PATCH_ALREADY_APPLY = -8;
+    public static final int ERROR_PATCH_CRASH_LIMIT = -9;
     public static final int ERROR_PATCH_CONDITION_NOT_SATISFIED = -10;
 
     public static final String PLATFORM = "platform";
@@ -152,5 +159,67 @@ public class Utils {
         } else {
             return src;
         }
+    }
+
+
+    /**
+     * 下载新版本应用
+     */
+    public static void downloadApk(final Context context, final String apkUrl, final String filePath, final String fileName) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL url = null;
+                InputStream in = null;
+                FileOutputStream out = null;
+                HttpURLConnection conn = null;
+                try {
+                    url = new URL(apkUrl);
+                    conn = (HttpURLConnection) url.openConnection();
+                    conn.connect();
+                    long fileLength = conn.getContentLength();
+                    in = conn.getInputStream();
+                    File file = new File(filePath);
+                    if (!file.exists()) {
+                        boolean result = file.mkdir();
+                    }
+                    out = new FileOutputStream(new File(filePath + "/" + fileName));
+                    byte[] buffer = new byte[1024];
+                    int len;
+                    long readLength = 0L;
+                    while ((len = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, len);
+                        readLength += len;
+                        if (readLength >= fileLength) {
+                            // 下载完毕，通知安装
+                            TinkerInstaller.onReceiveUpgradePatch(context,
+                                    filePath + "/" + fileName);
+                            break;
+                        }
+                    }
+                    out.flush();
+                } catch (Exception e) {
+                    XLog.e(TAG, e);
+                } finally {
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException e) {
+                            XLog.e(TAG, e);
+                        }
+                    }
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            XLog.e(TAG, e);
+                        }
+                    }
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                }
+            }
+        }).start();
     }
 }

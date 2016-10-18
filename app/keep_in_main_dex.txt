@@ -23,3 +23,8 @@
     *;
 }
 
+-keepattributes *Annotation*
+-keep class retrofit.** { *; }
+-keepclasseswithmembers class * {
+@retrofit.http.* <methods>; }
+-keepattributes Signature

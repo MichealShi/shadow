@@ -96,6 +96,7 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         //installTinker after load multiDex
         //or you can put com.tencent.tinker.** to main dex
         TinkerManager.installTinker(this);
+        AppData.init(base);
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
