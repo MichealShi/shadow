@@ -106,6 +106,8 @@ dependencies {
     compile "com.android.support:multidex:1.0.1"
 
     compile 'cn.jiguang:jpush:2.2.0'
+    // request runtime permission
+    compile 'com.yanzhenjie:permission:1.0.3'
 }
 
 def gitSha() {

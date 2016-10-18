@@ -1,7 +1,9 @@
 package com.independent.shadow;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,9 @@ import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RationaleListener;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -32,9 +37,20 @@ public class MainActivity extends AppCompatActivity {
         //test resource change
         Log.e(TAG, "i am on onCreate string:" + getResources().getString(R.string.test_resource));
 
+        // request runtime permission
+        AndPermission.with(this).requestCode(101)
+                .permission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .rationale(mRationaleListener)
+                .send();
+
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
+        bindViews();
+    }
+
+    private void bindViews() {
         findViewById(R.id.loadPatch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,4 +145,27 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         Utils.setBackground(true);
     }
+
+    private RationaleListener mRationaleListener = new RationaleListener() {
+        @Override
+        public void showRequestPermissionRationale(int requestCode, final Rationale rationale) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("友好提醒")
+                    .setMessage("没有存储权限应用可能无法正常使用！")
+                    .setPositiveButton("好，给你", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            rationale.resume();// 用户同意继续申请。
+                        }
+                    })
+                    .setNegativeButton("我拒绝", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            rationale.cancel(); // 用户拒绝申请。
+                        }
+                    }).show();
+        }
+    };
 }
