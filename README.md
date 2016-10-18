@@ -6,6 +6,7 @@ tinker 初体验
 ##注意事项
 
 ```
+[这里写链接内容](http://www.trojx.me/2016/09/28/tinker-sample-introduction/%20Tinker%E7%AE%80%E5%8D%95%E4%B8%8A%E6%89%8B%E6%95%99%E7%A8%8B)
 
  1. 在app的build.gradle文件中找到tinkerId = getTinkerIdValue()并将其替换成tinkerId = "tinkerId",
     其中后面的值可以随意设置.再替换ignoreWarning = false为ignoreWarning = true.
