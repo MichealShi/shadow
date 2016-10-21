@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.independent.shadow.SampleApplicationLike;
 import com.independent.shadow.util.Utils;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
@@ -59,7 +60,8 @@ public class SampleResultService extends DefaultTinkerResultService {
             @Override
             public void run() {
                 if (result.isSuccess) {
-                    Toast.makeText(getApplicationContext(), "patch success, please restart process", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(getApplicationContext(), "patch success, please restart process", Toast.LENGTH_LONG).show();
+                    restartProcess();
                 } else {
                     Toast.makeText(getApplicationContext(), "patch fail, please check reason", Toast.LENGTH_LONG).show();
                 }
@@ -137,5 +139,4 @@ public class SampleResultService extends DefaultTinkerResultService {
             }, filter);
         }
     }
-
 }

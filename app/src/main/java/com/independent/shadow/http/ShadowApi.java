@@ -2,9 +2,9 @@ package com.independent.shadow.http;
 
 import com.independent.shadow.model.HotfixModel;
 
-import retrofit.Call;
-import retrofit.http.Body;
-import retrofit.http.POST;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 /**
  * Created by iqianjin-shisong on 2016/10/18.
@@ -12,6 +12,6 @@ import retrofit.http.POST;
 
 public interface ShadowApi {
 
-    @POST("/C4000/M4001")
-    Call<HotfixModel> post(@Body ReqParam reqParam);
+    @POST("/getHotPatch")
+    Call<HotfixModel> post(@Body BaseRequestParam reqParam);
 }

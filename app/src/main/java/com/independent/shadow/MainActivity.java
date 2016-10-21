@@ -3,7 +3,6 @@ package com.independent.shadow;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -17,19 +16,11 @@ import android.widget.TextView;
 
 import com.independent.shadow.http.HttpClientUtils;
 import com.independent.shadow.util.Utils;
-import com.independent.shadow.util.XLog;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 import com.yanzhenjie.permission.AndPermission;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import cn.jpush.android.api.JPushInterface;
 

@@ -104,4 +104,13 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         getApplication().registerActivityLifecycleCallbacks(callback);
     }
 
+    /**
+     * 重启自身应用
+     * @param context
+     */
+    public static void restartApplication(Context context) {
+        final Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+    }
 }

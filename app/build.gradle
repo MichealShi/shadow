@@ -36,8 +36,8 @@ android {
         applicationId "com.independent.shadow"
         minSdkVersion 22
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 100
+        versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /**
@@ -49,7 +49,7 @@ android {
          * add for you in our task. you can copy tinker keep rules at
          * build/intermediates/tinker_intermediates/tinker_multidexkeep.pro
          */
-        multiDexKeepProguard file("keep_in_main_dex.txt")
+        multiDexKeepProguard file("tinker_multidexkeep.pro")
         /**
          * buildConfig can change during patch!
          * we can use the newly value when patch
@@ -109,14 +109,12 @@ dependencies {
     // request runtime permission
     compile 'com.yanzhenjie:permission:1.0.3'
 
-
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-
-    compile 'io.reactivex:rxjava:1.1.5'
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'io.reactivex:rxjava:1.2.1'
+    compile 'io.reactivex:rxandroid:1.2.1'
+// And ProGuard rules for RxJava!
+    compile 'com.artemzin.rxjava:proguard-rules:1.2.1.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'org.glassfish:javax.annotation:10.0-b28'
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
 }
@@ -348,7 +346,7 @@ if (buildWithTinker()) {
             /**
              * patch version via packageConfig
              */
-            configField("patchVersion", "1.0")
+            configField("patchVersion", "1.0.0")
         }
         //or you can add config filed outside, or get meta value from old apk
         //project.tinkerPatch.packageConfig.configField("test1", project.tinkerPatch.packageConfig.getMetaDataFromOldApk("Test"))
