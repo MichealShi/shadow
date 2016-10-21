@@ -4,10 +4,8 @@
 tinker 初体验
 ```
 ##注意事项
-
+[Tinker简单上手教程][1]
 ```
-[Tinker简单上手教程](http://www.trojx.me/2016/09/28/tinker-sample-introduction/)
-
  1. 在app的build.gradle文件中找到tinkerId = getTinkerIdValue()并将其替换成tinkerId = "tinkerId",
     其中后面的值可以随意设置.再替换ignoreWarning = false为ignoreWarning = true.
  2. 按照往常操作一样,编译打包debug apk并安装.此时Tinker会在工程的app/build/bakApk/目录下保存打包好的apk文件,
@@ -37,3 +35,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ```
+
+[1]: http://www.trojx.me/2016/09/28/tinker-sample-introduction/
