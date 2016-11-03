@@ -2,8 +2,8 @@ package com.independent.shadow.http;
 
 import android.content.Context;
 
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by chuck on 16/11/2.

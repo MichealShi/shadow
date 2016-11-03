@@ -35,7 +35,7 @@ public class HttpClientUtils {
         call.enqueue(new Callback<HotfixModel>() {
             @Override
             public void onResponse(Call<HotfixModel> call, Response<HotfixModel> response) {
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     HotfixModel hotfixModel = response.body();
                     if (hotfixModel.getCode() == 1 && !TextUtils.isEmpty(hotfixModel.getHotUrl())) {
                         Toast.makeText(context, "请求成功,正在下载补丁包", Toast.LENGTH_SHORT).show();
@@ -66,7 +66,7 @@ public class HttpClientUtils {
             @Override
             public void onResponse(Call<BaseHotfixModel> call, Response<BaseHotfixModel> response) {
                 XLog.i(TAG, call.request());
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     BaseHotfixModel baseHotfixModel = response.body();
                     if (baseHotfixModel.getCode() == 1) {
                         Toast.makeText(context, "提交成功", Toast.LENGTH_SHORT).show();
@@ -101,7 +101,7 @@ public class HttpClientUtils {
                 @Override
                 public void onResponse(Call<BaseHotfixModel> call, Response<BaseHotfixModel> response) {
                     XLog.i(TAG, call.request());
-                    if (response.isSuccess()) {
+                    if (response.isSuccessful()) {
                         BaseHotfixModel baseHotfixModel = response.body();
                         if (baseHotfixModel.getCode() == 1) {
                             callbackListener.onSuccess(baseHotfixModel);
