@@ -4,17 +4,20 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.independent.shadow.http.ActionCallbackListener;
 import com.independent.shadow.http.HttpClientUtils;
+import com.independent.shadow.model.BaseHotfixModel;
 import com.independent.shadow.util.Utils;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
@@ -47,10 +50,37 @@ public class MainActivity extends AppCompatActivity {
 
         bindViews();
 
-        HttpClientUtils.getHotFixApk(this);
     }
 
     private void bindViews() {
+
+        TextView mLable = (TextView) findViewById(R.id.label);
+//        mLable.setText("OK,加载补丁成功了！！");
+
+        findViewById(R.id.update).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                HttpClientUtils.getHotFixApk(MainActivity.this);
+//                HttpClientUtils.submitModifiedStatus(MainActivity.this);
+                HttpClientUtils.submitUserInfo(MainActivity.this, new ActionCallbackListener() {
+                    @Override
+                    public void onSuccess(BaseHotfixModel data) {
+                        Toast.makeText(MainActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onAppFailure(BaseHotfixModel data) {
+                        Toast.makeText(MainActivity.this, "提交失败" + data.getMsg(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure() {
+                        Toast.makeText(MainActivity.this, "服务器异常", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         findViewById(R.id.loadPatch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
