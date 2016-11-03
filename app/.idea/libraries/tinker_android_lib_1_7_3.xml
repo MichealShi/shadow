@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="tinker-android-lib-1.7.3">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.tencent.tinker/tinker-android-lib/1.7.3/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.tencent.tinker/tinker-android-lib/1.7.3/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tinker/tinker-android-lib/1.7.3/54d0e005531776370b334ffe6c981119aaed4ce/tinker-android-lib-1.7.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

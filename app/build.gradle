@@ -117,6 +117,11 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'org.glassfish:javax.annotation:10.0-b28'
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
+
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
 
 def gitSha() {

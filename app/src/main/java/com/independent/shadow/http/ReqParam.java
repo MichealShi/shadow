@@ -45,7 +45,6 @@ public class ReqParam {
         comm.setVersion(AppData.getVersionName());
     }
 
-
     public CommData getComm() {
         return comm;
     }
@@ -61,8 +60,13 @@ public class ReqParam {
         body.put(key, value);
     }
 
+    @Override
     public String toString() {
-        return "{comm" + this.comm.getPid() + " " + this.comm.getUs() + "}";
+        return "ReqParam{" +
+                "comm=" + comm +
+                ", body=" + body +
+                ", pid='" + pid + '\'' +
+                '}';
     }
 
     public String getPid() {
