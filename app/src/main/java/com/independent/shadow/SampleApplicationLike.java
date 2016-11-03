@@ -28,6 +28,7 @@ import android.support.multidex.MultiDex;
 import com.independent.shadow.log.MyLogImp;
 import com.independent.shadow.util.SampleApplicationContext;
 import com.independent.shadow.util.TinkerManager;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.app.ApplicationLifeCycle;

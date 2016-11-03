@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.independent.shadow.http.ActionCallbackListener;
 import com.independent.shadow.http.HttpClientUtils;
 import com.independent.shadow.model.BaseHotfixModel;
+import com.independent.shadow.util.SampleApplicationContext;
 import com.independent.shadow.util.Utils;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
@@ -34,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this.getApplication());
+
         Log.e(TAG, "i am on onCreate classloader:" + MainActivity.class.getClassLoader().toString());
         //test resource change
         Log.e(TAG, "i am on onCreate string:" + getResources().getString(R.string.test_resource));

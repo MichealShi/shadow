@@ -25,7 +25,6 @@ public class AppData {
     private static PreferenceUtil sp = new PreferenceUtil();
     private static Context context = null;
 
-
     /**
      * 初始化, 在Application中调用
      * @param c
