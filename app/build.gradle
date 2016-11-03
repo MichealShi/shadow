@@ -34,10 +34,10 @@ android {
 
     defaultConfig {
         applicationId "com.independent.shadow"
-        minSdkVersion 22
+        minSdkVersion 19
         targetSdkVersion 24
-        versionCode 100
-        versionName "1.0.0"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         /**
@@ -49,7 +49,7 @@ android {
          * add for you in our task. you can copy tinker keep rules at
          * build/intermediates/tinker_intermediates/tinker_multidexkeep.pro
          */
-        multiDexKeepProguard file("tinker_multidexkeep.pro")
+        multiDexKeepProguard file("keep_in_main_dex.txt")
         /**
          * buildConfig can change during patch!
          * we can use the newly value when patch
@@ -61,7 +61,7 @@ android {
          * so we can get the newly git version easily!
          */
         buildConfigField "String", "CLIENTVERSION", "\"${getTinkerIdValue()}\""
-        buildConfigField "String", "PLATFORM",  "\"all\""
+        buildConfigField "String", "PLATFORM", "\"all\""
 
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -70,9 +70,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : applicationId,
+                JPUSH_PKGNAME: applicationId,
                 JPUSH_APPKEY : "6f11aad7b85c4995ee4e99c3", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
     buildTypes {
@@ -109,12 +109,13 @@ dependencies {
     // request runtime permission
     compile 'com.yanzhenjie:permission:1.0.3'
 
-    compile 'io.reactivex:rxjava:1.2.1'
-    compile 'io.reactivex:rxandroid:1.2.1'
-// And ProGuard rules for RxJava!
-    compile 'com.artemzin.rxjava:proguard-rules:1.2.1.0'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
+
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'io.reactivex:rxandroid:1.2.0'
     compile 'org.glassfish:javax.annotation:10.0-b28'
     androidTestCompile 'com.android.support:support-annotations:24.2.1'
 
@@ -194,7 +195,7 @@ if (buildWithTinker()) {
          * the old apk path, use to diff with the new apk to build
          * add apk from the build/bakApk
          */
-        oldApk = getOldApkPath()
+        oldApk = getOldApkPath(); //"${bakPath}/app-debug-1102-11-22-33.apk";
         /**
          * optional，default 'false'
          * there are some cases we may get some warnings
@@ -351,7 +352,7 @@ if (buildWithTinker()) {
             /**
              * patch version via packageConfig
              */
-            configField("patchVersion", "1.0.0")
+            configField("patchVersion", "1.0")
         }
         //or you can add config filed outside, or get meta value from old apk
         //project.tinkerPatch.packageConfig.configField("test1", project.tinkerPatch.packageConfig.getMetaDataFromOldApk("Test"))
@@ -375,7 +376,7 @@ if (buildWithTinker()) {
     }
 
     List<String> flavors = new ArrayList<>();
-    project.android.productFlavors.each {flavor ->
+    project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
     boolean hasFlavors = flavors.size() > 0

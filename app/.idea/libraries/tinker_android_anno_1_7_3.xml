@@ -4,8 +4,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tinker/tinker-android-anno/1.7.3/48e2b57ba445614ca888c7eaf10112211922048b/tinker-android-anno-1.7.3.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.tencent.tinker/tinker-android-anno/1.7.3/a68fe69d72a3d3471a474b101431f32c7f91d4b4/tinker-android-anno-1.7.3-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
