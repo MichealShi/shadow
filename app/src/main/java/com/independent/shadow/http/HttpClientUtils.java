@@ -56,14 +56,13 @@ public class HttpClientUtils {
     }
 
 
-    
     @NonNull
     private static Callback<BaseHotfixModel> getCallbackBase(final ActionCallbackListener callbackListener) {
         return new Callback<BaseHotfixModel>() {
             @Override
             public void onResponse(Call<BaseHotfixModel> call, Response<BaseHotfixModel> response) {
                 XLog.i(TAG, call.request());
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     BaseHotfixModel baseHotfixModel = response.body();
                     judgMentCode(baseHotfixModel, callbackListener);
                 }
@@ -81,7 +80,7 @@ public class HttpClientUtils {
         return new Callback<HotfixModel>() {
             @Override
             public void onResponse(Call<HotfixModel> call, Response<HotfixModel> response) {
-                if (response.isSuccess()) {
+                if (response.isSuccessful()) {
                     HotfixModel hotfixModel = response.body();
                     judgMentCode(hotfixModel, callbackListener);
                 }
