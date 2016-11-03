@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                HttpClientUtils.getHotFixApk(MainActivity.this);
 //                HttpClientUtils.submitModifiedStatus(MainActivity.this);
-                HttpClientUtils.submitUserInfo(MainActivity.this, new ActionCallbackListener() {
+                HttpClientUtils.submitUserInfo( new ActionCallbackListener() {
                     @Override
                     public void onSuccess(BaseHotfixModel data) {
                         Toast.makeText(MainActivity.this, "提交成功", Toast.LENGTH_SHORT).show();
